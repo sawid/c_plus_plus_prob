@@ -2,7 +2,6 @@
 #include <vector>
 #include <list>
 #include <algorithm> 
-
 using namespace std;
 
 vector<double> removeNegativeVector(vector<double> inputVector)
@@ -14,7 +13,7 @@ vector<double> removeNegativeVector(vector<double> inputVector)
         }),
         inputVector.end()
     );
-
+    
     return inputVector;
     
 }

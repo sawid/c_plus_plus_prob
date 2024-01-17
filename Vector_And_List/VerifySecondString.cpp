@@ -25,6 +25,7 @@ bool checkLetterInString(const string& firstString, const string& secondString)
 
 int main()
 {
+    checkLetterInString("apple", "al");
     if (checkLetterInString("data", "da"))
     {
         cout << "True";

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -58,7 +59,9 @@ public:
 
     void addBook(string inputBookTitle, string inputBookAuthor, int inputBookQuantity)
     {
-        Book bookObject(inputBookTitle, inputBookAuthor, inputBookQuantity);
+        string upperinputbooktitle = inputBookTitle;
+        transform(upperinputbooktitle.begin(),upperinputbooktitle.end(),upperinputbooktitle.begin(),[](char c){return toupper(c);});
+        Book bookObject(upperinputbooktitle, inputBookAuthor, inputBookQuantity);
         books.push_back(bookObject);
     }
 
@@ -103,33 +106,59 @@ int main()
     string title, author;
     int quantity;
 
-    // while (true)
-    // {
-    //     cout << "Enter command (a: add, r: remove, s: search, l: list, q: quit): ";
-    //     cin >> command;
+    while (true)
+    {
+        cout << "Enter command (a: add, r: remove, s: search, l: list, q: quit): ";
+        cin >> command;
 
-    //     if (command == 'a')
-    //     {
-    //         cout << "Enter title: ";
-    //         cin >> title;
-    //         cout << "Enter Author: ";
-    //         cin >> author;
-    //         cout << "Enter Quantity: ";
-    //         cin >> quantity;
-    //     }
+        if (command == 'a')
+        {
+            cout << "Enter title: ";
+            cin >> title;
+            cout << "Enter Author: ";
+            cin >> author;
+            cout << "Enter Quantity: ";
+            cin >> quantity;
+            inventory.addBook(title, author, quantity);
+        }
+        else if (command == 's')
+        {
+            cout << "Enter title: ";
+            cin >> title;
+            Book result = inventory.findBook(title);
+            if (result.getAuthor() != "" && result.getTitle() != "" && result.getQuantity() != 0)
+            {
+                cout << "Founded : " << result.getAuthor() << result.getTitle() << result.getQuantity();
+            }
+            else
+            {
+                cout << "Not Founded";
+            }
+            
+        }
+        else if (command == 'l')
+        {
+            inventory.printInventory();
+        }
         
-    // }
+        else if (command == 'q')
+        {
+            break;
+        }
+        
+        
+    }
 
-    title = "Hey Jude";
-    author = "Jude Bellingham";
-    quantity = 5;
+    // title = "Hey Jude";
+    // author = "Jude Bellingham";
+    // quantity = 5;
 
-    inventory.addBook(title, author, quantity);
-    inventory.addBook(title, author, quantity);
-    inventory.printInventory();
-    inventory.removeBook(title);
-    Book resultBook = inventory.findBook(title);
-    cout << "Founded Title: " << resultBook.getTitle() << ", Author: " << resultBook.getAuthor() << ", Quantity: " << resultBook.getQuantity() << endl;
-    inventory.printInventory();
+    // inventory.addBook(title, author, quantity);
+    // inventory.addBook(title, author, quantity);
+    // inventory.printInventory();
+    // inventory.removeBook(title);
+    // Book resultBook = inventory.findBook(title);
+    // cout << "Founded Title: " << resultBook.getTitle() << ", Author: " << resultBook.getAuthor() << ", Quantity: " << resultBook.getQuantity() << endl;
+    // inventory.printInventory();
     return 0;
 }
