@@ -102,13 +102,14 @@ bool solveMaze(vector<vector<Cell>>& maze, int row, int col) {
         return false;
     }
 
-    // Check if we reached the exit
-    if (maze[row][col].type == EXIT) {
-        return true;
-    }
-
     // Mark the current cell as part of the solution path
     maze[row][col].type = SOLUTION;
+
+    // Check if we reached the exit
+    if (maze[row][col].type == EXIT) {
+        cout << "Reached the exit!\n";
+        return true;
+    }
 
     // Explore in all directions
     if (solveMaze(maze, row - 1, col) ||  // Up
@@ -125,6 +126,7 @@ bool solveMaze(vector<vector<Cell>>& maze, int row, int col) {
 }
 
 
+
 int main() {
     vector<vector<Cell>> maze = generateMaze();
 
@@ -132,7 +134,7 @@ int main() {
     printMaze(maze);
 
     // Find and display the solution path
-    solveMaze(maze, 0, 1);  // Start solving from the entry point
+    cout << solveMaze(maze, 0, 1);  // Start solving from the entry point
     cout << "\nMaze with Solution Path:" << endl;
     printMaze(maze);
 
