@@ -148,7 +148,7 @@ public:
     }
 
     WildPokemon& getRandomWildPokemon() {
-        int index = rand() % wildPokemons.size();
+        int index = rand() %wildPokemons .size();
         return wildPokemons[index];
     }
 };
